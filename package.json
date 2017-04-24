@@ -1,6 +1,6 @@
 {
   "name": "moxai",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Moxai (mɒks-eɪ) - Express Middleware for API mocks using Open API Initiative (OAI)",
   "engines": {
     "node": "4.x",
