@@ -1,0 +1,153 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"description": "Mock API used for testing",
+		"title": "Mock API",
+		"version": "0.0.1"
+	},
+	"tags": [
+	],
+	"paths": {
+		"/test/": {
+			"post": {
+				"tags": [
+					"test"
+				],
+				"summary": "test",
+				"description": "",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+      					"examples": {
+        					"application/json": {
+        						"route": "test",
+								"input": "none",
+								"method": "post"
+        					}
+         				}
+					}
+				}
+			},
+			"get": {
+				"tags": [
+					"test"
+				],
+				"summary": "test",
+				"description": "",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+      					"examples": {
+        					"application/json": {
+        						"route": "test",
+								"input": "none",
+								"method": "get"
+        					}
+         				}
+					}
+				}
+			}
+		},
+		"/test/{string}/": {
+			"get": {
+				"tags": [
+					"test string"
+				],
+				"summary": "test string",
+				"description": "",
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					 {
+						"name": "string",
+						"in": "path",
+						"description": "string",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+      					"examples": {
+        					"application/json": {
+        						"route": "test",
+								"input": "string",
+								"method": "get"
+        					}
+         				}
+					}
+				}
+			}
+		},
+		"/invalid/responses/": {
+			"get": {
+				"tags": [
+					"test string"
+				],
+				"summary": "test string",
+				"description": "",
+				"produces": [
+					"application/json"
+				]
+			}
+		},
+		"/invalid/200/": {
+			"get": {
+				"tags": [
+					"test string"
+				],
+				"summary": "test string",
+				"description": "",
+				"produces": [
+					"application/json"
+				],
+				"responses": {					
+				}
+			}
+		},
+		"/invalid/examples/": {
+			"get": {
+				"tags": [
+					"test string"
+				],
+				"summary": "test string",
+				"description": "",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Success"
+					}
+				}
+			}
+		},
+		"/invalid/json/": {
+			"get": {
+				"tags": [
+					"test string"
+				],
+				"summary": "test string",
+				"description": "",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+      					"examples": {
+         				}
+					}
+				}
+			}
+		}
+	}
+}

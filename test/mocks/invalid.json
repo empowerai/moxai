@@ -1,0 +1,10 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"description": "Invalid API used for testing",
+		"title": "Invalid API",
+		"version": "0.0.1"
+	},
+	"tags": [
+	]
+}
