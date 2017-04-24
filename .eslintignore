@@ -1,3 +1,4 @@
+
 # DotEnv
 .env
 
@@ -11,15 +12,14 @@ pids
 *.pid
 *.seed
 
-# Coverage, code docs and quality directories
+# Coverage & quality directories
 coverage
 quality
 lint
-docs
+config
 
 # Dependency directories
 node_modules
-jspm_packages
 
-# Optional npm cache directory
-.npm
+# Third party lib/lang & docs
+docs
