@@ -55,7 +55,6 @@
     "supertest": "^3.0.0"
   },
   "dependencies": {
-    "include": "^1.1.0",
     "matchstick": "^1.2.1"
   }
 }
