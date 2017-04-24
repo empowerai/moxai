@@ -1,0 +1,44 @@
+engines:
+  duplication:
+    enabled: true
+    config:
+      languages:
+      - javascript
+  eslint:
+    enabled: true
+  fixme:
+    enabled: true
+  nodesecurity:
+    enabled: true
+  markdownlint:
+    enabled: true
+    checks:
+      MD009:
+        enabled: false
+      MD010:
+        enabled: false
+      MD013:
+        enabled: false      
+      MD029:
+        enabled: false
+ratings:
+  paths:
+  - "**.js"
+  - "**.module"
+exclude_paths:
+- node_modules/
+- coverage/
+- test/
+- config/
+- lint/
+- docs/
+- "**/lang/"
+- "**/lib/"
+ecmaFeatures:
+  modules: true
+  jsx: true
+env:
+  amd: true
+  browser: true
+  jquery: true
+  node: true
