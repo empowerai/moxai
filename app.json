@@ -1,0 +1,17 @@
+{
+  "name": "moxai",
+  "description": "Moxai (mɒks-eɪ) - Express Middleware for API mocks using Open API Initiative (OAI)",
+  "repository": "https://github.com/nci-ats/moxai",
+  "keywords": [
+    "moxai",
+	"api",
+    "node",
+    "express",
+	"middleware",
+	"swagger",
+	"oai",
+	"mock",
+	"mocks",
+	"nci"
+  ]
+}
