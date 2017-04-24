@@ -85,7 +85,7 @@
         "no-unused-vars": "error",
         "no-use-before-define": "error",
         "callback-return": "error",
-        "global-require": "error",
+        "global-require": "off",
         "handle-callback-err": "error",
         "no-mixed-requires": "off",
         "no-new-require": "off",

@@ -13,7 +13,7 @@
 //*******************************************************************
 // required modules
 
-var include = require('include')(__dirname);
+var path = require('path');
 var matchstick = require('matchstick');
 
 //*******************************************************************
@@ -85,8 +85,8 @@ var getPath = function(reqPath, objectPaths){
  * Route mock API requests using Open API Initiative (OAI) [fka Swagger]
  * 
  * @param {Object} [options]
- * @param {string} [options.dir=mocks] - The directory location of OAI files.
- * @param {string} [options.file=api] - The name of OAI JSON file.
+ * @param {string} [options.dir=mocks] - The directory location of OAI files relative to parent directory.
+ * @param {string} [options.file=api] - The name of OAI JSON file. Must be located within directory.
  * @return {Function}	- Returns Express middleware function
  * @public
  */
@@ -100,13 +100,13 @@ function moxai(options) {
 
 	return function (req, res) {
 		
-		var moxInclude = '/' + moxDir + '/' + moxFile + '.json';
-		
+		var moxInclude = path.join(path.dirname(module.parent.filename), moxDir, moxFile + '.json');
+			
 		try {
-			moxObject = include(moxInclude);	
+			moxObject = require(moxInclude);	
 		}
 		catch (e) {
-			return error(req, res, 405, 'No mock API JSON file found in directory.');
+			return error(req, res, 500, 'No mock API JSON file found in directory.');
 		}
 		
 		var reqPath = req.path;
@@ -118,7 +118,7 @@ function moxai(options) {
 			moxPath = getPath(reqPath, moxObject.paths);
 		}
 		else {
-			return error(req, res, 405, 'Invalid mock API JSON paths.');
+			return error(req, res, 500, 'Invalid mock API JSON paths.');
 		}
 
 		if (!moxPath) {

@@ -25,12 +25,11 @@ describe('moxai tests', function () {
 	beforeEach(function () {
 		app = express();
 		
-		app.use('/mocks', moxai({'dir':'test/mocks'}));
+		app.use('/mocks', moxai());
 		
-		app.use('/bad/dir', moxai({'dir':'test/bad'}));
-		app.use('/bad/file', moxai({'dir':'test/mocks', 'file':'bad'}));
-		app.use('/bad/default', moxai());
-		app.use('/bad/invalid', moxai({'dir':'test/mocks', 'file':'invalid'}));
+		app.use('/bad/dir', moxai({'dir':'bad'}));
+		app.use('/bad/file', moxai({'file':'bad'}));
+		app.use('/bad/invalid', moxai({'dir':'../test/mocks', 'file':'invalid'}));
 	});
 
 	it('returns mock data from GET request', function (done) {
@@ -85,30 +84,24 @@ describe('moxai tests', function () {
 		request(app)
             .get('/mocks/invalid/json/')
             .expect(500, done);
-	});	
+	});
 	
-	it('returns 405 if directory invalid', function (done) {
+	it('returns 500 if directory invalid', function (done) {
 		request(app)
             .get('/bad/dir/')
-            .expect(405, done);
-	});	
+            .expect(500, done);
+	});
 	
-	it('returns 405 if file invalid', function (done) {
+	it('returns 500 if file invalid', function (done) {
 		request(app)
             .get('/bad/file/')
-            .expect(405, done);
-	});	
+            .expect(500, done);
+	});
 	
-	it('returns 405 if default invalid', function (done) {
-		request(app)
-            .get('/bad/default/')
-            .expect(405, done);
-	});	
-	
-	it('returns 405 if empty JSON found', function (done) {
+	it('returns 500 if empty JSON found', function (done) {
 		request(app)
             .get('/bad/invalid/')
-            .expect(405, done);
-	});	
+            .expect(500, done);
+	});
 
 });
