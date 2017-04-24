@@ -43,9 +43,9 @@
     "**/extjs/welcome/**",
     "**/docs/lang/**",
     "**/docs/lib/**",
-    "bower_components/**"
-	"lint/**"
-	"docs/**"
+    "bower_components/**",
+	"lint/**",
+	"docs/**",
 	"config/**"
   ],
   "test": [
