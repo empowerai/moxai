@@ -7,6 +7,7 @@
 [![bitHound Overall Score](https://www.bithound.io/github/nci-ats/moxai/badges/score.svg)](https://www.bithound.io/github/nci-ats/moxai)
 [![bitHound Dependencies](https://www.bithound.io/github/nci-ats/moxai/badges/dependencies.svg)](https://www.bithound.io/github/nci-ats/moxai/dependencies/npm)
 [![Gemnasium Dependency Status](https://gemnasium.com/badges/github.com/nci-ats/moxai.svg)](https://gemnasium.com/github.com/nci-ats/moxai)
+[![VersionEye Dependency Status](https://www.versioneye.com/user/projects/58fd85f3710da23fe20fe874/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/58fd85f3710da23fe20fe874)
 [![GitHub Tags](https://img.shields.io/github/tag/nci-ats/moxai.svg)](https://github.com/nci-ats/moxai/tags)
 [![GitHub Contributors](https://img.shields.io/github/contributors/nci-ats/moxai.svg)](https://github.com/nci-ats/moxai/graphs/contributors)
 [![GitHub Issues](https://img.shields.io/github/issues/nci-ats/moxai.svg)](https://github.com/nci-ats/moxai/issues)
