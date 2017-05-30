@@ -1,6 +1,6 @@
 {
   "name": "moxai",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Moxai (mɒks-eɪ) - Express Middleware for API mocks using Open API Initiative (OAI)",
   "engines": {
     "node": "4.x",
@@ -9,7 +9,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
-	"prepublish": "npm shrinkwrap --production",
+    "prepublish": "npm shrinkwrap --production",
     "test": "mocha test --recursive",
     "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha -- --recursive",
     "lint": "npm-run-all -c -s lint:es lint:es:out lint:md",

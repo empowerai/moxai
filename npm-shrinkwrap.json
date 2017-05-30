@@ -1,6 +1,6 @@
 {
   "name": "moxai",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "dependencies": {
     "discontinuous-range": {
       "version": "1.0.0",
