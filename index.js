@@ -46,7 +46,7 @@ function logging(req, message){
  * @param  {integer} status	- HTTP status code to return
  * @param  {String} message	- Error message to return
  */
-var error = function(req, res, status, message){
+function error(req, res, status, message) {
 	var output = {
 		'response': {
 			'success' : false,
@@ -55,14 +55,14 @@ var error = function(req, res, status, message){
 	};
 	logging(req, message);
 	return res.status(status).json(output);
-};
+}
 
 /**
  * Matches input path from request to paths object in OAI JSON file
  * @param  {Object} reqPath     - Path of request object from req.path
  * @param  {Object} objectPaths	- Paths in OAI JSON file from [object].paths
  */
-var getPath = function(reqPath, objectPaths){
+function getPath(reqPath, objectPaths) {
 	for (var k in objectPaths) {
 		if (objectPaths.hasOwnProperty(k)) {
 
@@ -74,13 +74,13 @@ var getPath = function(reqPath, objectPaths){
 			}
 		}
 	}
-};
+}
 
 /**
  * Randomizes output from JSON where value is regex.
  * @param  {Object} obj     - Object (JSON) of output to be randomized.
  */
-var randomizeOutput = function(obj){	
+function randomizeOutput(obj) {	
 	var output = JSON.parse(JSON.stringify(obj));	
 	traverse(output).forEach(function (x) {		
 		if (typeof x === 'string') {			
@@ -99,7 +99,7 @@ var randomizeOutput = function(obj){
 		}		
 	});
 	return output;
-};
+}
 
 /**
  * Route mock API requests using Open API Initiative (OAI) [fka Swagger]
@@ -116,12 +116,11 @@ function moxai(options) {
 	
 	var moxDir = opts.dir || 'mocks';
 	var moxFile = opts.file || 'api';
-	var moxRand = opts.random || false;
-	var moxObject, moxOutput;
+	var moxRand = opts.random || false;	
 
 	return function (req, res) {		
 		var moxInclude = path.join(path.dirname(module.parent.filename), moxDir, moxFile + '.json');
-			
+		var moxObject;	
 		try {
 			moxObject = require(moxInclude);	
 		}
@@ -163,10 +162,9 @@ function moxai(options) {
 								return error(req, res, 500, 'No endpoint json found.');
 							}
 							else {
-								moxOutput = moxObject.paths[moxPath][reqMethod].responses['200'].examples['application/json'];
+								var moxOutput = moxObject.paths[moxPath][reqMethod].responses['200'].examples['application/json'];
 								if (moxRand) {
 									moxOutput = randomizeOutput(moxOutput);
-									console.log('moxOutput : ' +  JSON.stringify(moxOutput) );
 								}
 								return res.json(moxOutput);
 							}
