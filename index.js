@@ -7,7 +7,6 @@
 */
 
 //*******************************************************************
-
 'use strict';
 
 //*******************************************************************
@@ -15,6 +14,8 @@
 
 var path = require('path');
 var matchstick = require('matchstick');
+var traverse = require('traverse');
+var RandExp = require('randexp');
 
 //*******************************************************************
 // moxai
@@ -25,7 +26,6 @@ var matchstick = require('matchstick');
  * @param  {String} message - Error message to output
  */
 function logging(req, message){
-
 	var attemptedRoute = req.originalUrl;
 	var browser = req.get('user-agent');
 	var referer = req.get('referer');
@@ -47,18 +47,14 @@ function logging(req, message){
  * @param  {String} message	- Error message to return
  */
 var error = function(req, res, status, message){
-
 	var output = {
 		'response': {
 			'success' : false,
 			'message': message
 		}
 	};
-
 	logging(req, message);
-
 	return res.status(status).json(output);
-
 };
 
 /**
@@ -67,7 +63,6 @@ var error = function(req, res, status, message){
  * @param  {Object} objectPaths	- Paths in OAI JSON file from [object].paths
  */
 var getPath = function(reqPath, objectPaths){
-
 	for (var k in objectPaths) {
 		if (objectPaths.hasOwnProperty(k)) {
 
@@ -82,24 +77,49 @@ var getPath = function(reqPath, objectPaths){
 };
 
 /**
+ * Randomizes output from JSON where value is regex.
+ * @param  {Object} obj     - Object (JSON) of output to be randomized.
+ */
+var randomizeOutput = function(obj){	
+	var output = obj;	
+	traverse(output).forEach(function (x) {		
+		if (typeof x === 'string') {			
+			if ( (x.indexOf('/') === 0) && (x.lastIndexOf('/') === (x.length - 1)) ) {				
+				var regs = x.substring(1, (x.length - 1) );				
+			
+				try {
+					var regx = new RegExp(regs);	
+					var randx = new RandExp(regx).gen();					
+					this.update(randx);				
+				}
+				catch (e) {
+					//console.log('e : ' +  e);
+				}			
+			}
+		}		
+	});
+	return output;
+};
+
+/**
  * Route mock API requests using Open API Initiative (OAI) [fka Swagger]
  * 
  * @param {Object} [options]
  * @param {string} [options.dir=mocks] - The directory location of OAI files relative to parent directory.
  * @param {string} [options.file=api] - The name of OAI JSON file. Must be located within directory.
+ * @param {boolean} [options.random=false] - Use random output for regex values in OAI JSON file.
  * @return {Function}	- Returns Express middleware function
  * @public
  */
-function moxai(options) {
-	
+function moxai(options) {	
 	var opts = options || {};
 	
 	var moxDir = opts.dir || 'mocks';
 	var moxFile = opts.file || 'api';
-	var moxObject;
+	var moxRand = opts.random || false;
+	var moxObject, moxOutput;
 
-	return function (req, res) {
-		
+	return function (req, res) {		
 		var moxInclude = path.join(path.dirname(module.parent.filename), moxDir, moxFile + '.json');
 			
 		try {
@@ -110,10 +130,8 @@ function moxai(options) {
 		}
 		
 		var reqPath = req.path;
-		var reqMethod = req.method.toLowerCase();
-		
-		var moxPath;
-	
+		var reqMethod = req.method.toLowerCase();		
+		var moxPath;	
 		if (moxObject.paths) {			
 			moxPath = getPath(reqPath, moxObject.paths);
 		}
@@ -145,7 +163,12 @@ function moxai(options) {
 								return error(req, res, 500, 'No endpoint json found.');
 							}
 							else {
-								return res.json(moxObject.paths[moxPath][reqMethod].responses['200'].examples['application/json']);
+								moxOutput = moxObject.paths[moxPath][reqMethod].responses['200'].examples['application/json'];
+								if (moxRand) {
+									moxOutput = randomizeOutput(moxOutput);
+									console.log('moxOutput : ' +  JSON.stringify(moxOutput) );
+								}
+								return res.json(moxOutput);
 							}
 						}
 					}
@@ -157,5 +180,4 @@ function moxai(options) {
 
 //*******************************************************************
 //exports
-
 module.exports = moxai;
