@@ -50,6 +50,8 @@ npm install moxai --save
 
 ## Usage
 
+Setup as standard [third-party middleware](https://expressjs.com/en/guide/using-middleware.html#middleware.third-party) which requires Express and mounting on a route, such as _'/mocks'_.
+
 ```javascript
 var express = require('express');
 var moxai = require('moxai');
@@ -64,19 +66,24 @@ app.listen(8000, function () {
 
 ## Options
 
+Options are passed as an object to moxai and all arguments are optional. 
+
 ```javascript
 var opts = {
  'dir': 'mocks',
  'file': 'api',
  'random': false
 };
+
+app.use('/mocks', moxai(opts));
+
 ```
 
-| Option | Type | Default | Description |
-| ---- | ---- | ---- | ---- |
-| dir | string | mocks | The directory location of OAI files relative to parent directory. |
-| file | string | api | The name of OAI JSON file. Must be located within directory location. |
-| random | boolean | false | Use random output for regex values in OAI JSON file. |
+| Option | Type | Default | Argument | Description |
+| ---- | ---- | ---- | ---- | ---- |
+| dir | string | mocks | optional | The directory location of OAI files relative to parent directory. |
+| file | string | api | optional | The name of OAI JSON file. Must be located within directory location. |
+| random | boolean | false | optional | Use random output for regex values in OAI JSON file. |
 
 ### dir
 
