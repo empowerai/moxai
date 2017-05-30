@@ -16,12 +16,12 @@
 
 # moxai
 
-Moxai (mɒks-eɪ) - Express Middleware for API mocks using Open API Initiative (OAI)
+Moxai (mɒks-eɪ) - [Express Middleware](https://expressjs.com/en/guide/using-middleware.html) for API mocks using [Open API Initiative (OAI)](https://www.openapis.org/)
 
 * [Installation](#installation)
 * [Usage](#usage)
 * [Testing](#testing)
-  * [Test Scripts](#test-scripts)
+  * [Scripts](#scripts)
   * [Test Data](#test-data)
 * [Dependencies](#dependencies)
   * [Module](#module)
@@ -59,22 +59,24 @@ app.listen(8000, function () {
 
 ## Testing
 
-### Test Scripts
+### Scripts
 
-- `npm test` to run Mocha unit tests.
-- `npm run coverage` for Istanbul code coverage. *Results in `/coverage` folder.*
-- `npm run lint` for ESLint static code analysis. *Results in `/lint` folder.*
+- `npm test` to run [Mocha](https://mochajs.org/) unit tests.
+- `npm run coverage` for [Istanbul](https://github.com/gotwarlost/istanbul) code coverage. *Results in `/coverage` folder.*
+- `npm run lint` for [ESLint](http://eslint.org/) static code analysis. *Results in `/lint` folder.*
 - `npm run docs` to run [JSDoc](http://usejsdoc.org/) code documentation. *Results in `/docs` folder*
 
 ### Test Data
 
-- Files: Test JSON files are stored in [test/mocks](https://github.com/nci-ats/moxai/tree/dev/test/mocks) directory
+- Files: Test [JSON](http://www.json.org/) files are stored in [test/mocks](https://github.com/nci-ats/moxai/tree/dev/test/mocks) directory
 
 ## Dependencies
 
-### Module
+### Modules
 
 - Matchstick: [matchstick](https://matchstickjs.com/) >= [1.2.x](https://www.npmjs.com/package/matchstick)
+- RandExp: [randexp](http://fent.github.io/randexp.js/) >= [0.4.x](https://www.npmjs.com/package/randexp)
+- Traverse: [traverse](https://github.com/substack/js-traverse) >= [0.6.x](https://www.npmjs.com/package/traverse)
 
 ### Application
 
