@@ -1,4 +1,5 @@
 [![Moxai (mɒks-eɪ) - Express Middleware for API mocks using Open API Initiative (OAI)](https://img.shields.io/badge/moxai-(m%C9%92ks--e%C9%AA)-ff69b4.svg)](README.md)
+[![npm](https://img.shields.io/npm/v/moxai.svg)](https://www.npmjs.com/package/moxai)
 [![TravisCI](https://travis-ci.org/nci-ats/moxai.svg?branch=dev)](https://travis-ci.org/nci-ats/moxai)
 [![Code Climate](https://codeclimate.com/github/nci-ats/moxai/badges/gpa.svg)](https://codeclimate.com/github/nci-ats/moxai)
 [![Code Climate Coverage](https://codeclimate.com/github/nci-ats/moxai/badges/coverage.svg)](https://codeclimate.com/github/nci-ats/moxai/coverage)
@@ -44,7 +45,7 @@ Moxai (mɒks-eɪ) - [Express Middleware](https://expressjs.com/en/guide/using-mi
 This is a [Node.js](https://nodejs.org/en/) module available through the [npm registry](https://www.npmjs.com/). Installation is done using the [`npm install` command](https://docs.npmjs.com/getting-started/installing-npm-packages-locally).
 
 ```sh
-$ npm install moxai
+$ npm install moxai --save
 ```
 
 ## Usage
@@ -68,7 +69,7 @@ var opts = {
  'dir': 'mocks',
  'file': 'api',
  'random': false
-}
+};
 ```
 
 | Option | Type | Default | Description |
