@@ -55,6 +55,8 @@
     "supertest": "^3.0.0"
   },
   "dependencies": {
-    "matchstick": "^1.2.1"
+    "matchstick": "^1.2.1",
+    "randexp": "^0.4.5",
+    "traverse": "^0.6.6"
   }
 }

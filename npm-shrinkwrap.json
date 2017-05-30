@@ -2,10 +2,30 @@
   "name": "moxai",
   "version": "0.0.3",
   "dependencies": {
+    "discontinuous-range": {
+      "version": "1.0.0",
+      "from": "discontinuous-range@1.0.0",
+      "resolved": "https://registry.npmjs.org/discontinuous-range/-/discontinuous-range-1.0.0.tgz"
+    },
     "matchstick": {
       "version": "1.2.1",
       "from": "matchstick@>=1.2.1 <2.0.0",
       "resolved": "https://registry.npmjs.org/matchstick/-/matchstick-1.2.1.tgz"
+    },
+    "randexp": {
+      "version": "0.4.5",
+      "from": "randexp@latest",
+      "resolved": "https://registry.npmjs.org/randexp/-/randexp-0.4.5.tgz"
+    },
+    "ret": {
+      "version": "0.1.14",
+      "from": "ret@>=0.1.10 <0.2.0",
+      "resolved": "https://registry.npmjs.org/ret/-/ret-0.1.14.tgz"
+    },
+    "traverse": {
+      "version": "0.6.6",
+      "from": "traverse@latest",
+      "resolved": "https://registry.npmjs.org/traverse/-/traverse-0.6.6.tgz"
     }
   }
 }
