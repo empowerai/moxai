@@ -20,11 +20,15 @@ Moxai (mɒks-eɪ) - [Express Middleware](https://expressjs.com/en/guide/using-mi
 
 * [Installation](#installation)
 * [Usage](#usage)
+* [Options](#options)
+  * [dir](#dir)
+  * [file](#file)
+  * [random](#random)
 * [Testing](#testing)
   * [Scripts](#scripts)
   * [Test Data](#test-data)
 * [Dependencies](#dependencies)
-  * [Module](#module)
+  * [Modules](#modules)
   * [Application](#application)
   * [Package](#package)
   * [Dependency Trackers](#dependency-trackers)
@@ -55,6 +59,98 @@ app.use('/mocks', moxai());
 app.listen(8000, function () {
   console.log('Express web server with Moxai listening on port 8000');
 })
+```
+
+## Options
+
+```javascript
+var opts = {
+ 'dir': 'mocks',
+ 'file': 'api',
+ 'random': false
+}
+```
+
+| Option | Type | Default | Description |
+| ---- | ---- | ---- | ---- |
+| dir | string | mocks | The directory location of OAI files relative to parent directory. |
+| file | string | api | The name of OAI JSON file. Must be located within directory location. |
+| random | boolean | false | Use random output for regex values in OAI JSON file. |
+
+### dir
+
+The directory where the files are stored.  This is relative to the parent directory and the default is _mocks_. In most applications, simply add a _mocks_ directory in the root of the application.
+
+```
+/
+├── mocks/
+├── app.js|index.js
+└── package.json
+```
+
+### file
+
+The file of the OAI (formerly Swagger) JSON file to use. This is compatible with OAI [version 2.0](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md). This must have a .json extension and the default is _api_, therefore the default file is _api.json_. The file must be in the designated [directory](#dir), which defaults to _mocks_.  
+
+```
+/
+├── mocks/
+    └── api.json
+├── app.js|index.js
+└── package.json
+```
+
+Mock output should be in the response examples section of the OAI JSON. This should be the exact JSON output expected by the mock API request.
+
+```json
+{
+  "swagger": "2.0",
+  "paths": {
+    "/api/": {
+      "get": {
+        "responses": {
+          "200": {
+            "examples": {
+              "application/json": {
+                "key": "value"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+### random
+
+Randomizes the output from the OAI JSON using regular expressions. Only randomizes values that are valid regex and are enclosed in forward slashes (/).  Back slashes (\) must be escaped by using double backslash (\\). Ignores any flags such as /i (ignore case) and /g (global). If error with regex, then will output original string.
+
+```json
+{
+  "swagger": "2.0",
+  "paths": {
+    "/api/": {
+      "get": {
+        "responses": {
+          "200": {
+            "examples": {
+              "application/json": {
+                "alphanumeric": "/^[a-z0-9]{2,10}$/",
+                "titlecase": "/^[A-Z][a-z]{4,16}$/",
+                "phonenumber": "/^[1-9]\\d{2}-\\d{3}-\\d{4}/",
+                "integer": "/[0-9]{1,7}/",
+                "boolean": "/true|false/",
+                "ignore": "/[[[ignore/"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
 ```
 
 ## Testing
