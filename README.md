@@ -172,7 +172,7 @@ Randomizes the output from the OAI JSON using regular expressions. Only randomiz
 
 ### Test Data
 
-* Files: Test [JSON](http://www.json.org/) files are stored in [test/mocks](https://github.com/nci-ats/moxai/tree/dev/test/mocks) directory
+* Files: Test [JSON](http://www.json.org/) files are stored in [test/mocks](test/mocks) directory
 
 ## Dependencies
 
@@ -185,13 +185,13 @@ Randomizes the output from the OAI JSON using regular expressions. Only randomiz
 ### Application
 
 * Runtime: [Node.js](https://nodejs.org) >= [4.x](https://nodejs.org/en/download/releases/)
-* Engine: [NPM](https://www.npmjs.com) >= [3.x](https://github.com/npm/npm/releases)
+* Engine: [NPM](https://www.npmjs.com) >= [4.x](https://github.com/npm/npm/releases)
 * Framework: [Express.js](https://expressjs.com/) >= [4.x](https://github.com/expressjs/express/releases)
 
 ### Package
 
-* [package.json](https://github.com/nci-ats/moxai/blob/dev/package.json)
-* [npm-shrinkwrap.json](https://github.com/nci-ats/moxai/blob/dev/npm-shrinkwrap.json)
+* [package.json](package.json)
+* [npm-shrinkwrap.json](npm-shrinkwrap.json)
 
 ### Dependency Trackers
 
