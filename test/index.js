@@ -27,6 +27,8 @@ describe('moxai tests', function () {
 		
 		app.use('/mocks', moxai());
 		
+		app.use('/rand', moxai({'random': true}));
+		
 		app.use('/bad/dir', moxai({'dir':'bad'}));
 		app.use('/bad/file', moxai({'file':'bad'}));
 		app.use('/bad/invalid', moxai({'dir':'../test/mocks', 'file':'invalid'}));
@@ -47,6 +49,12 @@ describe('moxai tests', function () {
 	it('returns mock data from GET request with parameter', function (done) {
 		request(app)
             .get('/mocks/test/hello/')
+            .expect(200, done);
+	});
+	
+	it('returns mock data from GET request with random data', function (done) {
+		request(app)
+            .get('/rand/random/')
             .expect(200, done);
 	});
 	
