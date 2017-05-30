@@ -125,7 +125,7 @@ Mock output should be in the response examples section of the OAI JSON. This sho
 
 ### random
 
-Randomizes the output from the OAI JSON using regular expressions. Only randomizes values that are valid regex and are enclosed in forward slashes (/).  Back slashes (\) must be escaped by using double backslash (\\). Ignores any flags such as /i (ignore case) and /g (global). If error with regex, then will output original string.
+Randomizes the output from the OAI JSON using regular expressions. Only randomizes values that are valid regex and are enclosed in forward slashes (/).  Back slashes (\\) must be escaped by using double backslash (\\\\). Ignores any flags such as /i (ignore case) and /g (global). If error with regex, then will output original string.
 
 ```json
 {
