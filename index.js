@@ -81,7 +81,7 @@ var getPath = function(reqPath, objectPaths){
  * @param  {Object} obj     - Object (JSON) of output to be randomized.
  */
 var randomizeOutput = function(obj){	
-	var output = obj;	
+	var output = JSON.parse(JSON.stringify(obj));	
 	traverse(output).forEach(function (x) {		
 		if (typeof x === 'string') {			
 			if ( (x.indexOf('/') === 0) && (x.lastIndexOf('/') === (x.length - 1)) ) {				
