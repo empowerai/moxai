@@ -77,7 +77,7 @@ function getPath(reqPath, objectPaths) {
 }
 
 /**
- * Randomizes output from JSON where value is regex.
+ * Randomizes output from JSON where value is regex. Try catch is used as it is the only fully valid way to check if string provided is indeed regex.
  * @param  {Object} obj     - Object (JSON) of output to be randomized.
  */
 function randomizeOutput(obj) {	
@@ -93,8 +93,8 @@ function randomizeOutput(obj) {
 					this.update(randx);				
 				}
 				catch (e) {
-					//console.log('e : ' +  e);
-				}			
+					//ignore if string is not valid regex.
+				}
 			}
 		}		
 	});
