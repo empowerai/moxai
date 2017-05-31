@@ -81,22 +81,22 @@ function getPath(reqPath, objectPaths) {
  * @param  {Object} obj     - Object (JSON) of output to be randomized.
  */
 function randomizeOutput(obj) {	
-	var output = JSON.parse(JSON.stringify(obj));	
-	traverse(output).forEach(function (x) {		
-		if (typeof x === 'string') {			
-			if ( (x.indexOf('/') === 0) && (x.lastIndexOf('/') === (x.length - 1)) ) {				
-				var regs = x.substring(1, (x.length - 1) );				
-			
+	var output = JSON.parse(JSON.stringify(obj));
+	traverse(output).forEach(function (x) {
+		if (typeof x === 'string') {
+			if ( (x.indexOf('/') === 0) && (x.lastIndexOf('/') === (x.length - 1)) ) {
+				var regs = x.substring(1, (x.length - 1) );
+
 				try {
-					var regx = new RegExp(regs);	
-					var randx = new RandExp(regx).gen();					
-					this.update(randx);				
+					var regx = new RegExp(regs);
+					var randx = new RandExp(regx).gen();
+					this.update(randx);
 				}
 				catch (e) {
 					//ignore if string is not valid regex.
 				}
 			}
-		}		
+		}
 	});
 	return output;
 }
@@ -111,27 +111,27 @@ function randomizeOutput(obj) {
  * @return {Function}	- Returns Express middleware function
  * @public
  */
-function moxai(options) {	
+function moxai(options) {
 	var opts = options || {};
-	
+
 	var moxDir = opts.dir || 'mocks';
 	var moxFile = opts.file || 'api';
-	var moxRand = opts.random || false;	
+	var moxRand = opts.random || false;
 
-	return function (req, res) {		
+	return function (req, res) {
 		var moxInclude = path.join(path.dirname(module.parent.filename), moxDir, moxFile + '.json');
-		var moxObject;	
+		var moxObject;
 		try {
-			moxObject = require(moxInclude);	
+			moxObject = require(moxInclude);
 		}
 		catch (e) {
 			return error(req, res, 500, 'No mock API JSON file found in directory.');
 		}
-		
+
 		var reqPath = req.path;
-		var reqMethod = req.method.toLowerCase();		
-		var moxPath;	
-		if (moxObject.paths) {			
+		var reqMethod = req.method.toLowerCase();
+		var moxPath;
+		if (moxObject.paths) {
 			moxPath = getPath(reqPath, moxObject.paths);
 		}
 		else {
@@ -172,7 +172,7 @@ function moxai(options) {
 					}
 				}
 			}
-		}		
+		}
 	};
 }
 
