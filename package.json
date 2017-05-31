@@ -1,6 +1,6 @@
 {
   "name": "moxai",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Moxai (mɒks-eɪ) - Express Middleware for API mocks using Open API Initiative (OAI)",
   "engines": {
     "node": "4.x",
@@ -8,7 +8,6 @@
   },
   "main": "src/index.js",
   "scripts": {
-    "start": "node src/index.js",
     "prepublish": "npm shrinkwrap --production",
     "test": "mocha test --recursive",
     "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha -- --recursive",
@@ -16,7 +15,7 @@
     "lint:es": "eslint . -f stylish || exit 0",
     "lint:es:out": "eslint . -o ./lint/eslint.html -f html || exit 0",
     "lint:es:fix": "eslint . --fix || exit 0",
-    "lint:md": "markdownlint ./docs ./README.md || exit 0",
+    "lint:md": "markdownlint ./README.md ./LICENSE.md ./CONTRIBUTING.md || exit 0",
     "docs": "jsdoc -c .jsdoc.json -d docs -t ./node_modules/ink-docstrap/template -R README.md -r ."
   },
   "repository": {

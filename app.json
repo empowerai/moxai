@@ -4,14 +4,14 @@
   "repository": "https://github.com/nci-ats/moxai",
   "keywords": [
     "moxai",
-	"api",
+    "api",
     "node",
     "express",
-	"middleware",
-	"swagger",
-	"oai",
-	"mock",
-	"mocks",
-	"nci"
+    "middleware",
+    "swagger",
+    "oai",
+    "mock",
+    "mocks",
+    "nci"
   ]
 }
