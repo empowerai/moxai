@@ -46,7 +46,7 @@ function logging(req, message){
  * @param  {integer} status	- HTTP status code to return
  * @param  {String} message	- Error message to return
  */
-var error = function(req, res, status, message){
+function error(req, res, status, message) {
 	var output = {
 		'response': {
 			'success' : false,
@@ -55,14 +55,14 @@ var error = function(req, res, status, message){
 	};
 	logging(req, message);
 	return res.status(status).json(output);
-};
+}
 
 /**
  * Matches input path from request to paths object in OAI JSON file
  * @param  {Object} reqPath     - Path of request object from req.path
  * @param  {Object} objectPaths	- Paths in OAI JSON file from [object].paths
  */
-var getPath = function(reqPath, objectPaths){
+function getPath(reqPath, objectPaths) {
 	for (var k in objectPaths) {
 		if (objectPaths.hasOwnProperty(k)) {
 
@@ -74,32 +74,32 @@ var getPath = function(reqPath, objectPaths){
 			}
 		}
 	}
-};
+}
 
 /**
- * Randomizes output from JSON where value is regex.
+ * Randomizes output from JSON where value is regex. Value strings encapsulated in slashes are evaluated as regex using try/catch and ignored if not valid.
  * @param  {Object} obj     - Object (JSON) of output to be randomized.
  */
-var randomizeOutput = function(obj){	
-	var output = obj;	
-	traverse(output).forEach(function (x) {		
-		if (typeof x === 'string') {			
-			if ( (x.indexOf('/') === 0) && (x.lastIndexOf('/') === (x.length - 1)) ) {				
-				var regs = x.substring(1, (x.length - 1) );				
-			
+function randomizeOutput(obj) {	
+	var output = JSON.parse(JSON.stringify(obj));
+	traverse(output).forEach(function (x) {
+		if (typeof x === 'string') {
+			if ( (x.indexOf('/') === 0) && (x.lastIndexOf('/') === (x.length - 1)) ) {
+				var regs = x.substring(1, (x.length - 1) );
+
 				try {
-					var regx = new RegExp(regs);	
-					var randx = new RandExp(regx).gen();					
-					this.update(randx);				
+					var regx = new RegExp(regs);
+					var randx = new RandExp(regx).gen();
+					this.update(randx);
 				}
 				catch (e) {
-					//console.log('e : ' +  e);
-				}			
+					//ignore if string is not valid regex.
+				}
 			}
-		}		
+		}
 	});
 	return output;
-};
+}
 
 /**
  * Route mock API requests using Open API Initiative (OAI) [fka Swagger]
@@ -111,28 +111,27 @@ var randomizeOutput = function(obj){
  * @return {Function}	- Returns Express middleware function
  * @public
  */
-function moxai(options) {	
+function moxai(options) {
 	var opts = options || {};
-	
+
 	var moxDir = opts.dir || 'mocks';
 	var moxFile = opts.file || 'api';
 	var moxRand = opts.random || false;
-	var moxObject, moxOutput;
 
-	return function (req, res) {		
+	return function (req, res) {
 		var moxInclude = path.join(path.dirname(module.parent.filename), moxDir, moxFile + '.json');
-			
+		var moxObject;
 		try {
-			moxObject = require(moxInclude);	
+			moxObject = require(moxInclude);
 		}
 		catch (e) {
 			return error(req, res, 500, 'No mock API JSON file found in directory.');
 		}
-		
+
 		var reqPath = req.path;
-		var reqMethod = req.method.toLowerCase();		
-		var moxPath;	
-		if (moxObject.paths) {			
+		var reqMethod = req.method.toLowerCase();
+		var moxPath;
+		if (moxObject.paths) {
 			moxPath = getPath(reqPath, moxObject.paths);
 		}
 		else {
@@ -163,10 +162,9 @@ function moxai(options) {
 								return error(req, res, 500, 'No endpoint json found.');
 							}
 							else {
-								moxOutput = moxObject.paths[moxPath][reqMethod].responses['200'].examples['application/json'];
+								var moxOutput = moxObject.paths[moxPath][reqMethod].responses['200'].examples['application/json'];
 								if (moxRand) {
 									moxOutput = randomizeOutput(moxOutput);
-									console.log('moxOutput : ' +  JSON.stringify(moxOutput) );
 								}
 								return res.json(moxOutput);
 							}
@@ -174,7 +172,7 @@ function moxai(options) {
 					}
 				}
 			}
-		}		
+		}
 	};
 }
 

@@ -11,6 +11,13 @@ testing
 .travis.yml
 codecov.yml
 .gitignore
+.bithoundrc
+.eslintignore
+.eslintrc.json
+.jsdoc.json
+.markdownlint.json
+app.json
+.npmignore
 
 # Logs
 logs
@@ -31,6 +38,7 @@ docs
 # Dependency directories
 node_modules
 jspm_packages
+*.tgz
 
 # Optional npm cache directory
 .npm
